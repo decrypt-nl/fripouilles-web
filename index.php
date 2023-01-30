@@ -1,6 +1,6 @@
 <?php
 // On génère une constante contenant le chemin vers la racine publique du projet
-define('ROOT', str_replace('index.php','' , $_SERVER['SCRIPT_FILENAME']));
+define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
 
 require_once(ROOT.'app/AbstractRepository.php');
 require_once(ROOT.'app/AbstractController.php');
@@ -12,7 +12,7 @@ $params = explode('/', $_GET['p']);
 if($params[0] != ""){
     // 1er paramètre : le nom du controller
     $controller = ucfirst($params[0]).'Controller';
-    // 2e paramètre : le nom de la fonction a appellé dans le controller
+    // 2e paramètre : le nom de la fonction a appelé dans le controller
     // Si il n'existe pas, on invoque la fonction index par defaut
     $action = isset($params[1]) ? $params[1] : 'index'; 
 
@@ -25,12 +25,12 @@ if($params[0] != ""){
         unset($params[0]);
         unset($params[1]);
 
-        // La fonction du controller peut maintenant être appelé en incluant les paramètres si il y a
+        // La fonction du controller peut maintenant être appelée en incluant les paramètres si il y a
         call_user_func_array([$controller, $action], $params);
     }else{
         // Si la méthode du controller n'existe on renvoie une 404
         http_response_code(404);
-        echo "La page recherchée n'existe pas";
+        echo 'La page recherchée n\'existe pas';
     }
 }else{
     // Si l'url ne contient aucun paramètres alors on affiche la page d'accueil
