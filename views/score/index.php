@@ -13,9 +13,7 @@
         <?php foreach($scores as $s): ?>
             <tr>
                 <td><?= $s['id'] ?></td>
-                <td>
-                    <a href="<?= TemplateHelper::urlPath('user/view/'.$s['user_id']) ?>"><?= $s['user_name'] ?></a>
-                </td>
+                <td><?= $s['username'] ?></td>
                 <td><?= $s['score'] ?></td>
                 <td><?= $s['time'] ?></td>
             </tr>
