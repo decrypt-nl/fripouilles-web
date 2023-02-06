@@ -2,8 +2,8 @@
 
 abstract class AbstractRepository
 {
-    private $dsn  = 'mysql:host=localhost;dbname=unity_test';
-    private $user = 'root';
+    private $dsn  = 'mysql:host=localhost;dbname=diabs_aps';
+    private $user = 'test';
     private $pwd  = '123';
 
     protected $pdo = null;
@@ -40,5 +40,10 @@ abstract class AbstractRepository
         $q->execute();
 
         return $q->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function delete(int $id): bool
+    {
+        
     }
 }

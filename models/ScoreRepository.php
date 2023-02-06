@@ -7,4 +7,9 @@ class ScoreRepository extends AbstractRepository
         $this->table = 'score';
         $this->connect();
     }
+
+    public function addScore(): void
+    {
+        
+    }
 }

@@ -1,21 +1,23 @@
-<h1 class="text-center">Tableau des scores</h1>
-<hr class="w-50 mx-auto">
-<table class="table table-striped table-bordered">
-    <thead>
+<?php $title = 'Page des scores'; ?>
+
+<h1 class="d-flex justify-content-center">Page des scores</h1>
+
+<table class="table table-hover table-bordered border-secondary table-sm caption-top">
+    <caption>Liste des joueurs</caption>
+    <thead class="table-dark">
         <tr>
-            <th scope="col">Score ID</th>
-            <th scope="col">Utilisateur</th>
+            <th scope="col">Pseudo</th>
             <th scope="col">Score</th>
             <th scope="col">Temps</th>
+            <!-- <th scope="col">Rank</th> -->
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         <?php foreach($scores as $s): ?>
             <tr>
-                <td><?= $s['id'] ?></td>
-                <td><?= $s['username'] ?></td>
-                <td><?= $s['score'] ?></td>
-                <td><?= $s['time'] ?></td>
+                <td class="table-primary"><?= $s['username'] ?></td>
+                <td class="table-warning"><?= $s['score'] ?> pièces</td>
+                <td class="table-secondary"><?= $s['timely'] ?> secondes</td>
             </tr>
         <?php endforeach ?>
     </tbody>
