@@ -6,4 +6,4 @@
     <hr>
     <p class="mb-0">Pour vous rediriger vers la page d'acceuil et battre un nouveau record clique sur le bouton juste en dessous ! <i class="fa-regular fa-face-kiss-wink-heart"></i></p>
 </div>
-<a class="btn btn-info btn-sm" href="index.php" role="button">CLIQUE MOI !!!<img src="<?= TemplateHelper::assetPath('images/Catcute.png') ?>" alt="bootstrap" class="img-circle"><a>
+<a class="btn btn-info btn-sm" href="<?= TemplateHelper::urlPath('home') ?>" role="button">CLIQUE MOI !!!<img src="<?= TemplateHelper::assetPath('images/Catcute.png') ?>" alt="bootstrap" class="img-circle"><a>

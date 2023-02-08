@@ -1,9 +1,11 @@
-<?php $title = 'Contact'; ?>
+<?php 
+$title = 'Contact';
+ ?>
 
 <?php if (empty($errors)=== false) { ?>
     <div class="alert alert-danger"><?php foreach ($errors as $err) {echo($err);}?></div> 
 <?php } ?>
-   
+
 <form method="POST">
     <div class="d-flex justify-content-center">
         <fieldset class="default-fieldset">

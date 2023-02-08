@@ -3,8 +3,8 @@
 abstract class AbstractRepository
 {
     private $dsn  = 'mysql:host=localhost;dbname=diabs_aps';
-    private $user = 'test';
-    private $pwd  = '123';
+    private $user = 'root';
+    private $pwd  = '';
 
     protected $pdo = null;
 
@@ -44,6 +44,11 @@ abstract class AbstractRepository
 
     public function delete(int $id): bool
     {
+        $sql = ('DELETE FROM '.$this->table.' WHERE id = :id');
+        /** @var PDOStatement */
+        $q = $this->pdo->prepare($sql);
+        $q->bindParam('id', $id, PDO::PARAM_INT);
         
+        return $q->execute();
     }
 }

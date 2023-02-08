@@ -48,25 +48,41 @@ class ContactController extends AbstractController
         $this->render('contact/form-merci');
     }
 
-    public function mesMessages(): void
+    public function messages(): void
     {
         // repository
-
+        $contactRepo = $this->getRepository(ContactRepository::class);
         // findAll
-
+        $messages = $contactRepo->findAll();
         // render
+        $this->render('contact/messages', [
+            'messages' => $messages,
+        ]);
     }
 
-    public function deleteMessage(int $id): void
+    public function delete(int $id): void
     {
         // repository
-
+        $contactRepo = $this->getRepository(ContactRepository::class);
         // findOne
-
+        $messages = $contactRepo->findOne($id);
         // Si findOne ne trouve rien
-        // -> on renvoie sur la page mesMessages
+        if(empty($messages)) {
+            // -> on renvoie sur la page mesMessages
+            header("Location:contact/messages");
+            exit();
+        }
+        
+        $contactRepo->delete($id);
+        header("Location:contact/messages");
+        exit();
+    }
 
-        // Si ok
-        // -> on delete (voir AbstratcRepository)
+    public function getNotif():void 
+    {
+        $contactRepo = $this->getRepository(ContactRepository::class);
+    
+        $SESSION = new AbstractController();
+        $SESSION->createNotif('Mon message', 'danger');
     }
 }

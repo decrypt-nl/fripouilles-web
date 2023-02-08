@@ -10,7 +10,8 @@
     <title> <?php echo $title ?></title>
 </head>
 <body>
-    <nav class="navbar bg-dark navbar-expand-lg navbar-light" data-bs-theme="dark">
+    <div>
+    <nav class="navbar bg-dark navbar-expand-md navbar-light" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand text-white pe-none"  href="<?= TemplateHelper::urlPath('home') ?>">Diabs_APS</a>
             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,5 +86,6 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>
