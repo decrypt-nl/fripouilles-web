@@ -8,34 +8,50 @@ class RegistrationController extends AbstractController
         $mdp = null;
         $remdp = null;
         $errors = [];
+       
 
         if(!empty($_POST)) {
+
             $username = htmlspecialchars($_POST['username']);
             $mdp = htmlspecialchars($_POST['mdp']);
             $remdp = htmlspecialchars($_POST['remdp']);
 
-            $mdpHash = password_hash($mdp, PASSWORD_DEFAULT);
-            if (strlen($username) < 3) {
-                $errors[] = "Votre username doit contenir au moins 3 caractères.";
-            }
-            if(!password_verify($mdp, $mdpHash)) {
-                $errors[] = "Erreur Username ou Mot de passe invalide";
-            }
-
             if($mdp !== $remdp) {
                 $errors[] = "Les deux mots de passe ne correspondent pas !";
             }
+
+            $mdpHash = password_hash($mdp, PASSWORD_BCRYPT);
+
+            if (strlen($username) < 3) 
+            {
+                $errors[] = "Votre username doit contenir au moins 3 caractères.";
+            }
+            if(!password_verify($mdp, $mdpHash)) 
+            {
+                $errors[] = "Erreur Username ou Mot de passe invalide";
+            }
+
             if(empty($errors)) {
                 /** @var RegistrationRepository */
-                $connexionRepo = $this->getRepository(RegistrationRepository::class);
-                $result = $connexionRepo->insertUser([
+                $registrationRepo = $this->getRepository(RegistrationRepository::class);
+                $result = $registrationRepo->insertUser([
                     'username' => $username,
-                    'mdp'      => $mdpHash,
+                    'mdp'  => $mdpHash,
                 ]);
+
+                if($result === false)
+                {
+                    $errors[] = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard';
+                } else {
+                    $this->createNotif('Inscription réussie', 'success');
+                    $this->redirectToRoute("registration/complete");
+                    exit();
+                }
             }
         }
         $this->render('registration/index', [
-            'username' => $username
+            'username' => $username,
+            'errors'   => $errors,
         ]);
     }
 

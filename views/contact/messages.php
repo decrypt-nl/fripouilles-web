@@ -1,10 +1,6 @@
 <?php 
 $title = 'Boite à messages'; 
 ?>
-  <div class="alert alert-danger alert-dismissible fade show- <?php echo $_SESSION['notif']['type']; ?>" role="alert">
-    <strong>Erreur survenue !</strong> Veuillez réessayer plus tard.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
 <h1 class="d-flex justify-content-center">Ma boîte à message</h1>
 <table class="table table-hover table-bordered border-secondary table-sm caption-top">
     <caption>Liste des messages</caption>

@@ -26,11 +26,11 @@ class ContactController extends AbstractController
                     'email'   => $email,
                     'message' => $message
                 ]);
-
+                
                 if($result === false){
                     $errors[] = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard';
                 } else {
-                    header("Location:contact/merci");
+                    $this->redirectTORoute("contact/merci");
                     exit();
                 }
             }
@@ -69,20 +69,12 @@ class ContactController extends AbstractController
         // Si findOne ne trouve rien
         if(empty($messages)) {
             // -> on renvoie sur la page mesMessages
-            header("Location:contact/messages");
+            $this->redirectToRoute("contact/messages");
             exit();
         }
         
         $contactRepo->delete($id);
-        header("Location:contact/messages");
+        $this->redirectToRoute("contact/messages");
         exit();
-    }
-
-    public function getNotif():void 
-    {
-        $contactRepo = $this->getRepository(ContactRepository::class);
-    
-        $SESSION = new AbstractController();
-        $SESSION->createNotif('Mon message', 'danger');
     }
 }

@@ -17,7 +17,6 @@ class ContactRepository extends AbstractRepository
             $q = $this->pdo->prepare($sql);
             $q->bindParam(':email', $data['email'], PDO::PARAM_STR);
             $q->bindParam(':message', $data['message'], PDO::PARAM_STR);
-            $q->execute();
 
             return $q->execute();
 

@@ -1,1 +1,1 @@
-<div class="alert alert-success">Inscription réussie !</div>
+<div class="alert alert-success">Merci de votre inscription à DIABS_APS !</div>

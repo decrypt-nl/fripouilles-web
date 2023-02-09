@@ -2,15 +2,18 @@
 
 abstract class AbstractController
 {
+    public function __construct() 
+    {
+        session_start();
+    }
+
     public function getRepository(string $repoName): AbstractRepository
     {
         require_once(ROOT.'models/'.$repoName.'.php');
         
         return new $repoName();
     }
-    public function __construct() {
-        session_start();
-    }
+   
     public function render(string $file, array $data = []): void
     {
         extract($data);
@@ -25,17 +28,18 @@ abstract class AbstractController
 
         require_once(ROOT.'views/base.php');
     }
-    public function createNotif($message, $type) {
+
+    public function redirectToRoute(string $route) : void
+    {
+        header("Location: http://diabs.localhost/". $route);
+        exit();
+    }
+
+    public function createNotif($message, $type) : void
+    {
         $_SESSION['notif'] = array(
             'messages'=> $message,
             'type'    => $type,
         );
-    }
-
-    public function notif() {
-        if(isset($_SESSION['notif'])) { 
-                 echo $_SESSION['notif']['message']; 
-            unset($_SESSION['notif']);
-        }
     }
 }
