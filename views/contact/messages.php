@@ -32,3 +32,12 @@ $title = 'Boite à messages';
     <?php endforeach ?>
   </tbody>
 </table>
+
+<script>
+        const divAlert = document.getElementById("alert-notif"); 
+        if(divAlert) {
+            setTimeout(() => {
+                divAlert.remove();
+            },("divAlert", "5000")); 
+        }
+    </script>

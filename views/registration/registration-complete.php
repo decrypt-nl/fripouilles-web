@@ -1,1 +1,12 @@
-<div class="alert alert-success">Merci de votre inscription à DIABS_APS !</div>
+<?php 
+$title = 'Inscription réussie';
+ ?>
+Merci de votre inscription ! Amusez-vous bien :)
+<script>
+        const divAlert = document.getElementById("alert-notif"); 
+        if(divAlert) {
+            setTimeout(() => {
+                divAlert.remove();
+            },("divAlert", "5000")); 
+        }
+    </script>

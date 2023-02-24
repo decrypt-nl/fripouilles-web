@@ -22,9 +22,9 @@ class RegistrationController extends AbstractController
 
             $mdpHash = password_hash($mdp, PASSWORD_BCRYPT);
 
-            if (strlen($username) < 3) 
+            if (strlen($username) < 4) 
             {
-                $errors[] = "Votre username doit contenir au moins 3 caractères.";
+                $errors[] = "Votre username doit contenir au moins 4 caractères.";
             }
             if(!password_verify($mdp, $mdpHash)) 
             {

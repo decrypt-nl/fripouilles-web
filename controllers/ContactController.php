@@ -15,8 +15,8 @@ class ContactController extends AbstractController
 
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false)
                 $errors[] = "EMAIL INVALIDE !!!";
-            if (strlen($message) < 3)
-                $errors[] = "MINIMUM 3 CARACTERES !!!";
+            if (strlen($message) < 10)
+                $errors[] = "MINIMUM 10 CARACTERES !!!";
 
             if(empty($errors))
             {
@@ -30,6 +30,7 @@ class ContactController extends AbstractController
                 if($result === false){
                     $errors[] = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard';
                 } else {
+                    $this->createNotif('Merci pour votre soutien', 'success');
                     $this->redirectTORoute("contact/merci");
                     exit();
                 }
@@ -74,6 +75,7 @@ class ContactController extends AbstractController
         }
         
         $contactRepo->delete($id);
+        $this->createNotif('Utlisateur supprimé', 'success');
         $this->redirectToRoute("contact/messages");
         exit();
     }

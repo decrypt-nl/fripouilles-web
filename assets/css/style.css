@@ -10,7 +10,6 @@ body {
 }
 .img-circle {
     justify-content: center;
-    align-content: center;
     display: flex;
     margin: auto;
     width: 100px;
@@ -22,7 +21,7 @@ body {
 #footer {
     background: black;
     color: white;
-    min-height: 30vh;
+    min-height: 24vh;
 }
 .contain {
     display: flex;
@@ -66,7 +65,7 @@ body {
     height: 350px;
     width: 350px;
 }
-.alert {
+.alert-notif {
     position: fixed;
     z-index: 2000;
 }
