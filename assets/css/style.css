@@ -6,17 +6,6 @@ body {
     background-repeat: no-repeat;
     background-image: url("../images/background.png");
     background-size: cover;
-    background-position: center;
-}
-.img-circle {
-    justify-content: center;
-    display: flex;
-    margin: auto;
-    width: 100px;
-    height: 100px;
-    border: 3px solid black;
-    border-radius: 900px;
-    background-color: sandybrown;
 }
 #footer {
     background: black;
@@ -54,16 +43,6 @@ body {
 }
 #main-container {
     min-height: 60vh;
-}
-.carousel-inner {
-    background-size: cover;
-    background-repeat: repeat;
-    display: flex;
-    margin-left: 450px;
-}
-.image {
-    height: 350px;
-    width: 350px;
 }
 .alert-notif {
     position: fixed;

@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand text-info" href="<?= TemplateHelper::urlPath('home') ?>">
-            <i class="fa-solid fa-house-chimney text-info pe-none me-2"></i>Diabs_APS |
+            <i class="fa-solid fa-house-chimney text-info pe-none me-2"></i>Les Fripouilles |
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,13 +31,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link text-warning" aria-current="page" href="<?= TemplateHelper::urlPath('score') ?>">
-                <i class="fa-solid fa-star text-warning"></i> Tableau des scores</a>
-                </li>
-                <li class="nav-item">
                 <a class="nav-link text-danger-emphasis" href="<?= TemplateHelper::urlPath('contact') ?>">
                 <i class="fa-solid fa-envelopes-bulk text-danger-emphasis"></i> Contact</a>
                 </li>
+
                 <li class="nav-item">
                 <a class="nav-link text-secondary" href="<?= TemplateHelper::urlPath('contact/messages') ?>">
                 <i class="fa-solid fa-comment-dots text-secondary"></i> Mes messages</a>
@@ -57,7 +54,7 @@
     </li>
 </nav>
     <div id="header">
-        <img src="<?= TemplateHelper::assetPath('images/cat.png') ?>" alt="" class="img-circle">
+        <!-- <img src="<?= TemplateHelper::assetPath('images/') ?>" alt="" class="img-circle"> -->
     </div>
 
     <div id="mainContainer">
@@ -74,33 +71,8 @@
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">About</a></li>
             </ul>
         </div>
-        <div class="footer-reseaux">
-            <h3>Nos réseaux <i class="fa-solid fa-globe"></i></h3>
-            <ul class="liste-media">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                        <i class="icons fa-brands fa-facebook text-primary"></i>Facebook/
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                        <i class=" icons fa-brands fa-github text-info"></i>Github/
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                        <i class="icons fa-brands fa-linkedin-in"></i>Linkedin/
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                        <i class="fa-brands fa-discord"></i>Discord/
-                    </a>
-                </li>
-            </ul>
-        </div>
         <div>
-            <h6 class="copyright ">&copy; 2023 Criac, Inc, All rights reserved.</h6>
+            <h6 class="copyright ">&copy; 2023 Fripouilles, Inc, All rights reserved.</h6>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

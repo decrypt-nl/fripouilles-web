@@ -31,7 +31,7 @@ abstract class AbstractController
 
     public function redirectToRoute(string $route) : void
     {
-        header("Location: http://diabs.localhost/". $route);
+        header("Location: http://fripouilles.localhost/". $route);
         exit();
     }
 
