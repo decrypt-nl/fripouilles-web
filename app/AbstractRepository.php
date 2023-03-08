@@ -4,7 +4,7 @@ abstract class AbstractRepository
 {
     private $dsn  = 'mysql:host=172.23.10.51;dbname=fripouilles';
     private $user = 'phpmyadmin';
-    private $pwd  = 'root';
+    private $pwd  = '';
 
     protected $pdo = null;
 
