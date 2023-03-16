@@ -2,7 +2,10 @@
 $email = null;
 $password = null;
 $errors = [];
+
 session_start();
+
+if(!empty($_POST)) {
 
 if (isset($_SESSION['id_utilisateur']) && isset($_SESSION['email'])) {
 
@@ -34,6 +37,7 @@ if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
     } else {
        $errors[] = 'Adresse e-mail ou mot de passe incorrect.';
     }
+}
 }
 ?>
 
