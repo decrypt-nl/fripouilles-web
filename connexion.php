@@ -1,6 +1,46 @@
+<?php
+$email = null;
+$password = null;
+$errors = [];
+session_start();
+
+if (isset($_SESSION['id_utilisateur']) && isset($_SESSION['email'])) {
+
+    header('accueil.php');
+    exit();
+}
+
+if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
+    $email = $_POST['email'];
+    $password = $_POST['mot_de_passe'];
+
+    $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+    $query->bindParam(':email', $email);
+    $query->execute();
+    $user = $query->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && sha1($password) === $user['mot_de_passe']) {
+
+        $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
+        $_SESSION['email'] = $user['email'];
+
+        // Crée un cookie pour l'utilisateur
+        setcookie('id_utilisateur', $user['id_utilisateur'], time() + 3600, '/');
+        setcookie('email', $user['email'], time() + 3600, '/');
+
+        // Redirige l'utilisateur vers la page d'accueil
+        header('accueil.php');
+        exit();
+    } else {
+       $errors[] = 'Adresse e-mail ou mot de passe incorrect.';
+    }
+}
+?>
+
 <?php 
 $title = 'Connexion';
- ?>
+require_once('includes/header.php');
+?>
  
 <?php if (empty($errors)=== false) { ?>
     <div class="alert alert-danger"><?php foreach ($errors as $err) {echo($err);}?></div> 
@@ -13,10 +53,10 @@ $title = 'Connexion';
             <h1 class="d-flex justify-content-center h3 text-primary">Connexion</h1>
             
             <div class="mb-3">
-                <label for="username" class="form-label">Username
+                <label for="email" class="form-label">Email
                     <i class="fa-solid fa-user"></i>
                 </label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="votre email" value="<?= $username ?>" required>
+                <input type="email" class="form-control" name="email" id="username" placeholder="Saisir votre email" value="<?= $email ?>" required>
             </div>
             <div class="mb-3">
                 <label for="mdp" class="form-label">Mot de passe
@@ -37,3 +77,5 @@ $title = 'Connexion';
         </fieldset>
     </div>
 </form>
+<?php 
+require_once('includes/footer.php');
