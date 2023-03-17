@@ -1,54 +1,74 @@
 <?php
-$email = null;
-$password = null;
 $errors = [];
+session_start(); //démarrer la session
 
-session_start();
-
-if(!empty($_POST)) {
-
-if (isset($_SESSION['id_utilisateur']) && isset($_SESSION['email'])) {
-
-    header('accueil.php');
-    exit();
+if(isset($_SESSION["email"])) {
+    header("accueil.php");
+    exit;
 }
+require_once('config.php');
 
-if (isset($_POST['email']) && isset($_POST['mot_de_passe'])) {
-    $email = $_POST['email'];
-    $password = $_POST['mot_de_passe'];
-
-    $query = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-    $query->bindParam(':email', $email);
-    $query->execute();
-    $user = $query->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && sha1($password) === $user['mot_de_passe']) {
-
-        $_SESSION['id_utilisateur'] = $user['id_utilisateur'];
-        $_SESSION['email'] = $user['email'];
-
-        // Crée un cookie pour l'utilisateur
-        setcookie('id_utilisateur', $user['id_utilisateur'], time() + 3600, '/');
-        setcookie('email', $user['email'], time() + 3600, '/');
-
-        // Redirige l'utilisateur vers la page d'accueil
-        header('accueil.php');
-        exit();
+// Vérifier si le formulaire a été soumis
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Vérifier si les champs email et mot de passe sont vides
+    if(empty(trim($_POST["email"])) || empty(trim($_POST["mdp"]))) {
+        $errors[] = "Veuillez entrer un email et un mot de passe.";
     } else {
-       $errors[] = 'Adresse e-mail ou mot de passe incorrect.';
+        // Préparer une requête SELECT pour récupérer l'email et le mot de passe de l'utilisateur
+        $sql = "SELECT email, mdp FROM users WHERE email = :email";
+
+        if($stmt = $bdd->prepare($sql)) {
+            // Liaison des variables à la requête préparée en tant que paramètres
+            $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+
+            // Définir les paramètres
+            $param_email = trim($_POST["email"]);
+
+            // Exécution de la requête préparée
+            if($stmt->execute()) {
+                // Récupérer le résultat de la requête
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Vérifier si l'email existe dans la base de données
+                if($row) {
+                    // Vérifier si le mot de passe entré correspond au mot de passe haché dans la base de données
+                    if($row["mdp"] == sha1($_POST["mdp"])) {
+                        // Démarrer une nouvelle session
+                        session_start();
+
+                        // Stocker les données de l'utilisateur dans la session
+                        $_SESSION["email"] = $row["email"];
+
+                        // Rediriger l'utilisateur vers la page d'accueil
+                        header("location: accueil.php");
+                    } else {
+                        // Afficher un message d'erreur si le mot de passe est incorrect
+                        $errors[] =  "Le mot de passe est incorrect.";
+                    }
+                } else {
+                    // Afficher un message d'erreur si l'email n'existe pas dans la base de données
+                    $errors[] =  "Aucun compte n'a été trouvé avec cet email.";
+                }
+            } else {
+                $errors[] = "Oops! Quelque chose s'est mal passé. Veuillez réessayer plus tard.";
+            }
+
+            // Fermer la requête préparée
+            unset($stmt);
+        }
     }
-}
+
+    // Fermer la connexion à la base de données
+    $bdd = null;
 }
 ?>
-
+<?php if (empty($errors)=== false) { ?>
+    <div class="alert alert-danger"><?php foreach ($errors as $err) {echo($err);}?></div> 
+<?php } ?>
 <?php 
 $title = 'Connexion';
 require_once('includes/header.php');
 ?>
- 
-<?php if (empty($errors)=== false) { ?>
-    <div class="alert alert-danger"><?php foreach ($errors as $err) {echo($err);}?></div> 
-<?php } ?>
 
 <form method="POST">
     <div class="d-flex justify-content-center">
@@ -60,7 +80,7 @@ require_once('includes/header.php');
                 <label for="email" class="form-label">Email
                     <i class="fa-solid fa-user"></i>
                 </label>
-                <input type="email" class="form-control" name="email" id="username" placeholder="Saisir votre email" value="<?= $email ?>" required>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Saisir votre email" required>
             </div>
             <div class="mb-3">
                 <label for="mdp" class="form-label">Mot de passe
@@ -83,3 +103,4 @@ require_once('includes/header.php');
 </form>
 <?php 
 require_once('includes/footer.php');
+?>

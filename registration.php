@@ -5,7 +5,7 @@ $prenom = null;
 $nom = null;
 $email = null;
 $mdp = null;
-//$remdp = null;
+$remdp = null;
 $errors = [];
 
 if(!empty($_POST)) {

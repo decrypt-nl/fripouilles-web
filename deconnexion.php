@@ -1,17 +1,24 @@
 <?php
-// Démarre la session
+// Démarrer la session
 session_start();
 
-// Détruit toutes les variables de session
-session_unset();
+// Vérifier si l'utilisateur est connecté
+if(isset($_SESSION["email"])) {
+    // Détruire toutes les variables de session
+    session_unset();
 
-// Détruit la session
-session_destroy();
+    // Détruire la session
+    session_destroy();
 
-// Détruit le cookie de session
-setcookie('PHPSESSID', '', time() - 3600);
+    // Détruire le cookie
+    setcookie("PHPSESSID", "", time() - 3600);
 
-// Redirige l'utilisateur vers la page de connexion
-header('Location: connexion.php');
-exit();
+    // Rediriger l'utilisateur vers la page de connexion
+    header("accueil.php");
+    exit();
+} else {
+    // Rediriger l'utilisateur vers la page de connexion si la session n'est pas définie
+    header("accueil.php");
+    exit();
+}
 ?>
