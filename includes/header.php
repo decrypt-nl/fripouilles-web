@@ -24,8 +24,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link text-danger-emphasis" href="contact.php">
-                <i class="fa-solid fa-envelopes-bulk text-danger-emphasis"></i> Contact</a>
+                <a class="nav-link text-danger-emphasis" href="modifier.php">
+                <i class="fa-solid fa-envelopes-bulk text-danger-emphasis"></i> Modifier mes données</a>
                 </li>
             </ul>
         </div>

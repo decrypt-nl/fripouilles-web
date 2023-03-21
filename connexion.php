@@ -3,8 +3,8 @@ $errors = [];
 session_start(); //démarrer la session
 
 if(isset($_SESSION["email"])) {
-    header("accueil.php");
-    exit;
+    header("Location: accueil.php");
+    exit();
 }
 require_once('config.php');
 
@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Veuillez entrer un email et un mot de passe.";
     } else {
         // Préparer une requête SELECT pour récupérer l'email et le mot de passe de l'utilisateur
-        $sql = "SELECT email, mdp FROM users WHERE email = :email";
+        $sql = "SELECT email, mdp, prenom, nom FROM users WHERE email = :email";
 
         if($stmt = $bdd->prepare($sql)) {
             // Liaison des variables à la requête préparée en tant que paramètres
@@ -38,9 +38,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // Stocker les données de l'utilisateur dans la session
                         $_SESSION["email"] = $row["email"];
+                        $_SESSION["prenom"] = $row["prenom"];
+                        $_SESSION["nom"] = $row["nom"];
 
                         // Rediriger l'utilisateur vers la page d'accueil
-                        header("location: accueil.php");
+                        header("Location: accueil.php");
                     } else {
                         // Afficher un message d'erreur si le mot de passe est incorrect
                         $errors[] =  "Le mot de passe est incorrect.";

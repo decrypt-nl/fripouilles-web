@@ -1,5 +1,6 @@
 <?php 
 $title = 'Inscription réussie';
+include('compte.php');
  ?>
 Merci de votre inscription ! Amusez-vous bien :)
 <script>

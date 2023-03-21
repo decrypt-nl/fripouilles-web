@@ -1,17 +1,28 @@
 <?php
 
+require_once('config.php');
+
+session_start();
+
+if (isset($_SESSION["email"])) {
+    header("Location: accueil.php");
+    exit;
+}
+
 $status = null;
 $prenom = null;
 $nom = null;
 $email = null;
 $mdp = null;
 $remdp = null;
+$enfant = null;
 $errors = [];
 
 if(!empty($_POST)) {
     $status = htmlspecialchars($_POST['status']);
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
+    $enfant = htmlspecialchars($_POST['enfant']);
     $email = htmlspecialchars($_POST['email']);
     $mdp = htmlspecialchars($_POST['mdp']);
     $remdp = htmlspecialchars($_POST['remdp']);
@@ -33,16 +44,6 @@ if(!empty($_POST)) {
     }
 
     if(empty($errors)) {
-        
-        try {
-            $dbname = "fripouilles";
-            $dbuser = "admfrip";
-            $dbhost = "192.168.1.63";
-            $dbpassword = "root";
-            $bdd = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpassword);
-        } catch (PDOException $e) {
-            exit();
-        }
 
         $query = "SELECT * FROM users WHERE email = :email";
         $statement = $bdd->prepare($query);
@@ -52,16 +53,18 @@ if(!empty($_POST)) {
 
         if($user){
             $errors[] = "Cet e-mail est déjà utilisé.";
-            header('registration.php');
+            header('Location: registration.php');
+
         } else{
-        $sql = $bdd->prepare('INSERT INTO users (status, nom, prenom, email, mdp) VALUES(:status, :nom, :prenom, :email, :mdp)'); 
+        $sql = $bdd->prepare('INSERT INTO users (status, nom, prenom, email, mdp, enfant) VALUES(:status, :nom, :prenom, :email, :mdp, :enfant)'); 
         $sql->bindParam(':status', $status, PDO::PARAM_STR);
         $sql->bindParam(':nom', $nom, PDO::PARAM_STR);
         $sql->bindParam(':prenom', $prenom, PDO::PARAM_STR);
         $sql->bindParam(':email', $email, PDO::PARAM_STR);
         $sql->bindParam(':mdp', $mdp, PDO::PARAM_STR);
+        $sql->bindParam(':enfant', $enfant, PDO::PARAM_INT);
         $sql->execute();
-        header('connexion.php');
+        header('Location: connexion.php');
         exit();
         }
     }
@@ -85,20 +88,28 @@ require_once('includes/header.php');
             <div class="input-group">
                 <div class="input-group-text">
                 <label for="label-form" class="form-label">Assistante Maternelle</label>
-                <input class="form-check-input" type="radio"  name="status" id="status" value="Assistante" aria-label="Radio button for following text input">
-                ㅤㅤㅤㅤㅤㅤㅤ
-                <label for="label-form" class="form-label">Parents</label>
-                <input class="form-check-input" type="radio"  name="status" id="status" value="Parent" aria-label="Radio button for following text input">
+                <input class="form-check-input" type="radio"  name="status" id="status" value="Assistante" aria-label="Radio button for following text input" checked required>
+                ㅤㅤㅤㅤㅤ
+                <label for="label-form" class="form-label">Parent</label>
+                <input class="form-check-input" type="radio"  name="status" id="status" value="Parent" aria-label="Radio button for following text input" required>
+                ㅤㅤㅤㅤㅤㅤ
+                <label for="label-form" class="form-label">Autres</label>
+                <input class="form-check-input" type="radio"  name="status" id="status" value="Autre" aria-label="Radio button for following text input" required>
                 </div>
             </div>
             <div class="input-group">
                 <div class="input-group-text">
                 <label for="form-label" class="form-label">Nom</label>
-                <input class="form-control" type="text" name="nom" id="nom">
+                <input class="form-control" type="text" name="nom" id="nom" required>
                 ㅤㅤㅤ
                 <label for="form-label" class="form-label">Prénom</label>
-                <input class="form-control" type="text" name="prenom" id="prenom">
+                <input class="form-control" type="text" name="prenom" id="prenom" required>
                 </div>
+            </div>
+
+            <div class="mb-0">
+                <label for="enfant" class="form-label">Nombre d'enfants ?</label>
+                <input type="number" class="form-control" name="enfant" id="enfant" placeholder="Mettez 0 si vous n'avez pas d'enfants" required>
             </div>
 
             <div class="mb-3">
@@ -119,9 +130,18 @@ require_once('includes/header.php');
                 </label>
                 <input type="password" class="form-control" name="remdp" id="remdp" placeholder="Confirmez votre mot de passe" required>
             </div>
+
+            <div class="input-group fs-6">
+                <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" value="check" aria-label="Checkbox for following text input" required>
+                </div>
+                <label for="mentions-legales" class="form-label"><a href="mentions-legales.php">J'accepte les mentions légales</a></label>
+            </div>
             <div class="col-auto">
                 <button type="submit" class="btn_envoye btn btn-success mb-3">Envoyer</button>
             </div>
+            <p class="fs-6 text-start">Dans le cadre de l'usage de données à caractère nominatif,</p>
+            <p>que nous puissions utiliser vos données conformément à nos mentions légales.</p>
         </fieldset>
     </div>
 </form>

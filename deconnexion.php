@@ -14,11 +14,11 @@ if(isset($_SESSION["email"])) {
     setcookie("PHPSESSID", "", time() - 3600);
 
     // Rediriger l'utilisateur vers la page de connexion
-    header("accueil.php");
+    header("Location: accueil.php");
     exit();
 } else {
     // Rediriger l'utilisateur vers la page de connexion si la session n'est pas définie
-    header("accueil.php");
+    header("Location: accueil.php");
     exit();
 }
 ?>
