@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Veuillez entrer un email et un mot de passe.";
     } else {
         // Préparer une requête SELECT pour récupérer l'email et le mot de passe de l'utilisateur
-        $sql = "SELECT email, mdp, prenom, nom FROM users WHERE email = :email";
+        $sql = "SELECT email, mdp, prenom, nom, status, enfant FROM users WHERE email = :email";
 
         if($stmt = $bdd->prepare($sql)) {
             // Liaison des variables à la requête préparée en tant que paramètres
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION["email"] = $row["email"];
                         $_SESSION["prenom"] = $row["prenom"];
                         $_SESSION["nom"] = $row["nom"];
-
+                        $_SESSION["nom"] = $row["enfant"];
                         // Rediriger l'utilisateur vers la page d'accueil
                         header("Location: accueil.php");
                     } else {
@@ -89,12 +89,6 @@ require_once('includes/header.php');
                     <i class="fa-solid fa-lock"></i>
                 </label>
                 <input type="password" class="form-control" name="mdp" id="mdp" placeholder="Saisir votre mot de passe" required>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Se souvenir de moi
-                </label>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn_envoye btn btn-success mb-3">Me connecter</button>

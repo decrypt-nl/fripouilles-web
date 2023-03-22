@@ -47,36 +47,10 @@ body {
 #main-container {
     min-height: 60vh;
 }
-#notification {
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 300px;
-	padding: 10px;
-	background-color: #f2f2f2;
-	color: #333;
-	border: 1px solid #ddd;
-	box-shadow: 0 0 10px #ddd;
-	text-align: center;
-	z-index: 9999;
-	display: none;
+img {
+    width: 25%;
+    height: 25%;
 }
-
-.success {
-	color: green;
-}
-
-.error {
-	color: red;
-}
-
-.close {
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 10px;
-	font-weight: bold;
-	cursor: pointer;
-}
+  
 
   

@@ -1,6 +1,6 @@
 <?php
 
-$host = '192.168.1.63';
+$host = '172.23.10.29';
 $dbname = 'fripouilles'; 
 $username = 'admfrip'; 
 $password = 'root'; 
