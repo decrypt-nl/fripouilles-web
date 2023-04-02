@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Connexion à la base de données avec PDO
 
-        $host = '172.23.10.35';
+        $host = '172.23.10.25';
         $dbname = 'fripouilles'; 
         $username = 'admfrip'; 
         $password = 'root'; 

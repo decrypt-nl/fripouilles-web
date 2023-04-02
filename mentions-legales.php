@@ -7,21 +7,17 @@ require_once('includes/header.php');
 <h1 class="d-flex justify-content-center">Mentions Légales</h1>
 <h3 class="d-flex justify-content-center">Editeur</h3>
 <ul>
-    <p>Nom de la société : Les Fripouilles</p>
-    <p>Forme juridique : [Forme juridique de la société]</p>
-    <p>Adresse : [Adresse de la société]</p>
-    <p>Téléphone : [Numéro de téléphone de la société]</p>
-    <p>Adresse e-mail : [Adresse e-mail de la société]</p>
-    <p>Numéro d'inscription au registre du commerce et des sociétés : [Numéro RCS de la société]</p>
-    <p>Capital social : [Montant du capital social de la société]</p>
-    <p>Directeur de la publication : [Nom du directeur de la publication]</p>
+    <p>Nom de la société : Le Relais Les Fripouilles</p>
+    <p>Adresse : Allée Levillain</p>
+    <p>Téléphone : 03-21-91-00-00 </p>
+    <p>Adresse e-mail :  ram@ville-boulogne-sur-mer.fr</p>
 </ul>
 
 <h3 class="d-flex justify-content-center">Hébergement</h3>
 <ul>
-   <p>Nom de l'hébergeur : [Nom de l'hébergeur]</p>
-   <p>Adresse : [Adresse de l'hébergeur]</p>
-   <p>Téléphone : [Numéro de téléphone de l'hébergeur]</p>
+   <p>Nom de l'hébergeur : TOM</p>
+   <p>Adresse : 35 rue de Paris</p>
+   <p>Téléphone : 00 01 02 03 04</p>
 </ul>
 <h3 class="d-flex justify-content-center">Propriété intellectuelle</h3>
 <p>
@@ -52,7 +48,7 @@ Si vous estimez, après nous avoir contactés, que vos droits « Informatique et
 <p>Ce site utilise des cookies pour améliorer votre expérience de navigation. Pour en savoir plus, veuillez consulter notre politique de cookies.</p>
 
 <h3 class="d-flex justify-content-center">Limitation de responsabilité</h3>
-<p>[Nom de la société] ne saurait être tenue responsable de tout dommage direct ou indirect, quelle qu'en soit la nature, résultant de l'utilisation de ce site web.</p>
+<p>[Fripouilles.fr] ne saurait être tenue responsable de tout dommage direct ou indirect, quelle qu'en soit la nature, résultant de l'utilisation de ce site web.</p>
 
 <h3 class="d-flex justify-content-center">Droit applicable</h3>
 <p>Les présentes mentions légales sont soumises au droit français. Tout litige relatif à l'interprétation ou à l'exécution de ces dernières sera de la compétence exclusive des tribunaux français.</p>
