@@ -11,10 +11,11 @@ if (!isset($_SESSION['email'])) {
 
 // Récupération des données de l'utilisateur
 $email = $_SESSION['email'];
-$query = "SELECT * FROM users WHERE email = ?";
-$stmt = $bdd->prepare($query);
-$stmt->execute([$email]);
-$user = $stmt->fetch();
+$stmt = $bdd->prepare("CALL GetUser(?)");
+$stmt->bindParam(1, $email);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt->closeCursor();
 
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,9 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Si toutes les données sont valides, mise à jour en base de données
     if (empty($errors)) {
-        $query = "UPDATE users SET email = ?, mdp = ?, nom = ?, prenom = ?, enfant = ? WHERE email = ?";
-        $stmt = $bdd->prepare($query);
-        $stmt->execute([$email, $password, $nom, $prenom, $enfant, $_SESSION['email']]);
+        $stmt = $bdd->prepare("CALL updateUser(?, ?, ?, ?, ?, ?)");
+        $stmt->bindParam(1, $email);
+        $stmt->bindParam(2, $password);
+        $stmt->bindParam(3, $nom);
+        $stmt->bindParam(4, $prenom);
+        $stmt->bindParam(5, $enfant);
+        $stmt->bindParam(6, $_SESSION['email']);
+        $stmt->execute();
+        $stmt->closeCursor();
 
         // Mise à jour de la variable de session avec le nouvel email de l'utilisateur
         $_SESSION['email'] = $email;

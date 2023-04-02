@@ -14,15 +14,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty(trim($_POST["email"])) || empty(trim($_POST["mdp"]))) {
         $errors[] = "Veuillez entrer un email et un mot de passe.";
     } else {
-        // Préparer une requête SELECT pour récupérer l'email et le mot de passe de l'utilisateur
-        $sql = "SELECT email, mdp, prenom, nom, status, enfant FROM users WHERE email = :email";
+        // Appeler la procédure stockée pour récupérer les informations de l'utilisateur
+        $sql = "CALL login(:email, :mdp)";
 
         if($stmt = $bdd->prepare($sql)) {
             // Liaison des variables à la requête préparée en tant que paramètres
             $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+            $stmt->bindParam(":mdp", $param_password, PDO::PARAM_STR);
 
             // Définir les paramètres
             $param_email = trim($_POST["email"]);
+            $param_password = $_POST["mdp"];
 
             // Exécution de la requête préparée
             if($stmt->execute()) {
@@ -31,25 +33,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Vérifier si l'email existe dans la base de données
                 if($row) {
-                    // Vérifier si le mot de passe entré correspond au mot de passe haché dans la base de données
-                    if($row["mdp"] == sha1($_POST["mdp"])) {
-                        // Démarrer une nouvelle session
-                        session_start();
+                    // Démarrer une nouvelle session
+                    session_start();
 
-                        // Stocker les données de l'utilisateur dans la session
-                        $_SESSION["email"] = $row["email"];
-                        $_SESSION["prenom"] = $row["prenom"];
-                        $_SESSION["nom"] = $row["nom"];
-                        $_SESSION["nom"] = $row["enfant"];
-                        // Rediriger l'utilisateur vers la page d'accueil
-                        header("Location: accueil.php");
-                    } else {
-                        // Afficher un message d'erreur si le mot de passe est incorrect
-                        $errors[] =  "Le mot de passe est incorrect.";
-                    }
+                    // Stocker les données de l'utilisateur dans la session
+                    $_SESSION["email"] = $row["email"];
+                    $_SESSION["prenom"] = $row["prenom"];
+                    $_SESSION["nom"] = $row["nom"];
+                    $_SESSION["enfant"] = $row["enfant"];
+
+                    // Rediriger l'utilisateur vers la page d'accueil
+                    header("Location: accueil.php");
+                    exit();
                 } else {
-                    // Afficher un message d'erreur si l'email n'existe pas dans la base de données
-                    $errors[] =  "Aucun compte n'a été trouvé avec cet email.";
+                    // Afficher un message d'erreur si l'email ou le mot de passe est incorrect
+                    $errors[] =  "L'email ou le mot de passe est incorrect.";
                 }
             } else {
                 $errors[] = "Oops! Quelque chose s'est mal passé. Veuillez réessayer plus tard.";
@@ -63,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     // Fermer la connexion à la base de données
     $bdd = null;
 }
+
 ?>
 <?php if (empty($errors)=== false) { ?>
     <div class="alert alert-danger"><?php foreach ($errors as $err) {echo($err);}?></div> 
