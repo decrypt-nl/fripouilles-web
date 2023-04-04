@@ -26,6 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mdp = $_POST['mdp'];
     $remdp = htmlspecialchars($_POST['remdp']);
     $enfant = $_POST['enfant'];
+    $date_agrement = $_POST['Date_Agrement'];
+    $diplome = $_POST['Diplome_assistante'];
+    $date_diplome = $_POST['Date_diplome'];
 
     // Validation des champs du formulaire
     if(!empty($_POST)) {
@@ -55,12 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     // Si le formulaire est valide, insérer les données dans la base de données
     if (empty($erreurs)) {
-        // Hacher le mot de passe avec sha1
-        $mdp_hache = sha1($mdp);
-
         // Connexion à la base de données avec PDO
 
-        $host = '192.168.1.91';
+        $host = '172.23.10.22';
         $dbname = 'fripouilles'; 
         $username = 'admfrip'; 
         $password = 'root'; 
@@ -77,13 +77,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $erreurs[] = "Cet email est déjà utilisé";
             } else {
                 // Insérer les données dans la table utilisateurs avec une procédure stockée
-                $stmt = $conn->prepare("CALL insert_utilisateur(:status, :nom, :prenom, :email, :mdp, :enfant)");
+                $stmt = $conn->prepare("CALL insert_utilisateur(:status, :nom, :prenom, :email, :mdp, :enfant, :Date_Agrement, :Diplome_assistante, :Date_diplome)");
                 $stmt->bindParam(':status', $status);
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':prenom', $prenom);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':mdp', $mdp_hache);
                 $stmt->bindParam(':enfant', $enfant);
+                $stmt->bindParam(':Date_Agrement', $date_agrement);
+                $stmt->bindParam(':Diplome_assistante', $diplome);
+                $stmt->bindParam(':Date_diplome', $date_diplome);
                 $stmt->execute();
                 echo "L'inscription a été enregistrée avec succès.";
             }
@@ -110,10 +113,10 @@ if (!empty($erreurs)) { ?>
 
             <div class="input-group">
                 <div class="input-group-text">
-                <label for="label-form" class="form-label">Assistante Maternelle</label>
+                <label for="label-form" class="form-label"><a href="connexion-assistante.php">Maternelle</a></label>
                 <input class="form-check-input" type="radio"  name="status" id="status" value="Assistante" value="autre" <?php if (isset($status) && $status === "Assistante") echo "checked"; ?>aria-label="Radio button for following text input" checked required>
                 ㅤㅤㅤㅤㅤ
-                <label for="label-form" class="form-label">Parent</label>
+                <label for="label-form" class="form-label"><a href="connexion-parent.php">Parent</a></label>
                 <input class="form-check-input" type="radio"  name="status" id="status" value="Parent" value="autre" <?php if (isset($status) && $status === "Parent") echo "checked"; ?> aria-label="Radio button for following text input" required>
                 ㅤㅤㅤㅤㅤㅤ
                 <label for="label-form" class="form-label">Autres</label>
@@ -154,12 +157,32 @@ if (!empty($erreurs)) { ?>
                 <input type="password" class="form-control" name="remdp" id="remdp" placeholder="Confirmez votre mot de passe" required>
             </div>
 
+            <div class="mb-4">
+                <label for="Date_Agrement" class="form-label">Date d'agrément 
+                  
+                </label>
+                <input type="date" class="form-control" name="Date_Agrement" id="Date_Agrement" placeholder="Rensigner la date d'agrément" required>
+            </div>
+            <div class="mb-4">
+                <label for="Diplome_assistante" class="form-label">Nom du Diplome
+                   
+                </label>
+                <input type="text" class="form-control" name="Diplome_assistante" id="Diplome_assistante" placeholder="Nom du diplome" required>
+            </div>
+            <div class="mb-4">
+                <label for="Date_diplome" class="form-label">Date du diplome
+                    
+                </label>
+                <input type="date" class="form-control" name="Date_diplome" id="Date_diplome" placeholder="Rensigner la date du diplome" required>
+            </div>
+
             <div class="input-group fs-6">
                 <div class="input-group-text">
                 <input class="form-check-input mt-0" type="checkbox" value="check" aria-label="Checkbox for following text input" required>
                 </div>
                 <label for="mentions-legales" class="form-label"><a href="mentions-legales.php">J'accepte les mentions légales</a></label>
             </div>
+    
             <div class="col-auto">
                 <button type="submit" class="btn_envoye btn btn-success mb-3">Envoyer</button>
             </div>
