@@ -8,14 +8,14 @@ require_once('includes/header.php');
 <h3 class="d-flex justify-content-center">Editeur</h3>
 <ul>
     <p>Nom de la société : Le Relais Les Fripouilles</p>
-    <p>Adresse : Allée Levillain</p>
+    <p>Adresse : Rue de Paris</p>
     <p>Téléphone : 03-21-91-00-00 </p>
-    <p>Adresse e-mail :  ram@ville-boulogne-sur-mer.fr</p>
+    <p>Adresse e-mail :  ram@ville-fr.com</p>
 </ul>
 
 <h3 class="d-flex justify-content-center">Hébergement</h3>
 <ul>
-   <p>Nom de l'hébergeur : TOM</p>
+   <p>Nom de l'hébergeur : Moi</p>
    <p>Adresse : 35 rue de Paris</p>
    <p>Téléphone : 00 01 02 03 04</p>
 </ul>
