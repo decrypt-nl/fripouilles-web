@@ -1,9 +1,9 @@
 <?php
 
-$host = '172.23.10.22';
-$dbname = 'fripouilles'; 
-$username = 'admfrip'; 
-$password = 'root'; 
+$host = ''; // Adresse ip
+$dbname = ''; // Nom de la base de données
+$username = ''; // Nom d'utilisateur
+$password = ''; // Le mot de passe 
 
 try {
     $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
