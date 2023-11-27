@@ -7,10 +7,10 @@ $meal = $_GET['meal'];
 $expenses = $_GET['expenses'];
 
 // Connexion à la base de données MySQL
-$host = '169.254.9.74';
-$dbname = 'fripouilles';
-$username = 'admfrip';
-$password = 'root';
+$host = '';
+$dbname = '';
+$username = '';
+$password = '';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
