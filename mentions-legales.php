@@ -9,7 +9,7 @@ require_once('includes/header.php');
 <ul>
     <p>Nom de la société : Le Relais Les Fripouilles</p>
     <p>Adresse : Rue de Paris</p>
-    <p>Téléphone : 03-21-00-00-00 </p>
+    <p>Téléphone : 00-00-00-00 </p>
     <p>Adresse e-mail :  ram@ville-fr.com</p>
 </ul>
 
