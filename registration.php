@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($erreurs)) {
         // Connexion à la base de données avec PDO
 
-        $host = '172.23.10.22';
-        $dbname = 'fripouilles'; 
-        $username = 'admfrip'; 
-        $password = 'root'; 
+        $host = '';
+        $dbname = ''; 
+        $username = ''; 
+        $password = ''; 
 
         try {
                 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
@@ -173,7 +173,7 @@ if (!empty($erreurs)) { ?>
                 <label for="Date_diplome" class="form-label">Date du diplome
                     
                 </label>
-                <input type="date" class="form-control" name="Date_diplome" id="Date_diplome" placeholder="Rensigner la date du diplome" required>
+                <input type="date" class="form-control" name="Date_diplome" id="Date_diplome" placeholder="Renseigner la date du diplome" required>
             </div>
 
             <div class="input-group fs-6">
