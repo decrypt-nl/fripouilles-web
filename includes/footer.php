@@ -14,11 +14,11 @@
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">
             Le Relais Les Fripouilles
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">
-            Allée Levillain</li>
+            Allée rue de Paris</li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">
-            03-21-91-00-00
+            00-00-00-00-00
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">
-            Courriel : ram@ville-boulogne-sur-mer.fr
+            Courriel : ram@ville-fr.com
             </li>
         </ul>
     </div>
